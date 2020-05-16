@@ -2,6 +2,8 @@ class Mover {
   PVector location;
   PVector velocity;
   PVector acceleration;
+  PVector wind = new PVector(10, 1);
+  PVector tmp_vel;
 
   Mover() {
     location = new PVector(width/2, height/2);
@@ -14,7 +16,7 @@ class Mover {
     mouse.sub(location);
     mouse.setMag(0.5);
     acceleration = mouse;
-    
+
     velocity.add(acceleration);
     location.add(velocity);
     velocity.limit(5);
@@ -29,5 +31,22 @@ class Mover {
 
   void display() {
     ellipse(location.x, location.y, 20, 20);
+    fill(140, 140);
+  }
+
+  void wind() {
+    if (keyPressed) {
+      if (key == CODED) {
+        if (keyCode == UP) {
+          tmp_vel = velocity;
+          velocity.add(wind);
+        } else if (keyCode == DOWN) {
+          velocity.sub(wind);
+        } else {
+          tmp_vel = velocity;
+          wind = new PVector(0, 0);
+        }
+      }
+    }
   }
 }
