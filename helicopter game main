@@ -1,7 +1,7 @@
 Mover m;
 
 void setup() {
-  size(640, 640);
+  size(320 , 320);
   m = new Mover();
 }
 
