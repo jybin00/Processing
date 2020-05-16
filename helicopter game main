@@ -6,9 +6,9 @@ void setup() {
 }
 
 void draw() {
+  m.wind();
   background(255);
   m.update();
   m.edges();
   m.display();
-  
 }
