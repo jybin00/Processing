@@ -1,21 +1,26 @@
 Mover m;
 
 void setup() {
-  size(640, 320);
+  size(640, 320,P3D);
   m = new Mover();
   smooth(4);
+  background(0,0,0);
 }
 
 void draw() {
-  background(255);
-
+  fill(200,200,200);
+  ellipse(m.location.x,m.location.y,50,30);
+  
   PVector f = new PVector(0, 0.1);
+  ambientLight(255,255,255,m.location.x,m.location.y,0);
   m.applyForce(f);
   m.wind();
   m.edges();
   m.display();
   m.update();
   textSize(15);
+  fill(0,0,0);
+  
   fill(0, 102, 153);
 
   pushMatrix();
