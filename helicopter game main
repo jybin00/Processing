@@ -6,12 +6,12 @@ void setup() {
 }
 
 void draw() {
-  m.wind();
   background(255);
-  m.update();
+  m.wind();
   m.edges();
   m.display();
   m.gravity();
+  m.update();
   println(m.velocity);
   println(m.location);
 }
