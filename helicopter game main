@@ -1,17 +1,20 @@
 Mover m;
 
 void setup() {
-  size(320 , 320);
+  size(640 , 320);
   m = new Mover();
 }
 
 void draw() {
   background(255);
+  
+  PVector f = new PVector(0,0.1);
+  m.applyForce(f);
   m.wind();
   m.edges();
   m.display();
-  m.gravity();
   m.update();
-  println(m.velocity);
-  println(m.location);
+  println("acceleration : " +m.acceleration.x, m.acceleration.y);
+  println(m.velocity.x,m.velocity.y);
+  println(m.location.x,m.location.x);
 }
