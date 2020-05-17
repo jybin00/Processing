@@ -1,20 +1,27 @@
 Mover m;
 
 void setup() {
-  size(640 , 320);
+  size(640, 320);
   m = new Mover();
+  smooth(4);
 }
 
 void draw() {
   background(255);
-  
-  PVector f = new PVector(0,0.1);
+
+  PVector f = new PVector(0, 0.1);
   m.applyForce(f);
   m.wind();
   m.edges();
   m.display();
   m.update();
-  println("acceleration : " +m.acceleration.x, m.acceleration.y);
-  println(m.velocity.x,m.velocity.y);
-  println(m.location.x,m.location.x);
+  textSize(15);
+  fill(0, 102, 153);
+
+  pushMatrix();
+  text("acceleration: " + m.acceleration.x +" " + m.acceleration.y, 10, 15);
+  text("velocity: " + String.format("%.2f", m.velocity.x) +" " +
+    String.format("%.2f", m.velocity.y), 10, 30);
+  text("location " + String.format("%.2f", m.location.x) + " " + String.format("%.2f", m.location.y), 10, 45);
+  popMatrix();
 }
