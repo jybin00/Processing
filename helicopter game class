@@ -54,10 +54,10 @@ class Mover {
         if (keyCode == UP) {
           tmp_vel = velocity;
           acceleration.add(wind_up);
-        } else if (keyCode == LEFT) {
+        } if (keyCode == LEFT) {
           tmp_vel = velocity;
           acceleration.add(wind_left);
-        } else if (keyCode == RIGHT) {
+        } if (keyCode == RIGHT) {
           tmp_vel = velocity;
           acceleration.add(wind_right);
         }
