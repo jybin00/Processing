@@ -2,12 +2,16 @@ class Mover {
   PVector location;
   PVector velocity;
   PVector acceleration;
-  PVector wind = new PVector(0, -0.4);
+  PVector tmp_vel;
+  PVector wind_up= new PVector(0, -0.2);
+  PVector wind_left= new PVector(-0.1, 0);
+  PVector wind_right= new PVector(0.1, 0);
   PVector gravity = new PVector(0, 0.1);
 
   Mover() {
     location = new PVector(width/2, height/2);
-    velocity = new PVector(0, 0);
+    velocity = new PVector(1, -1);
+    tmp_vel = velocity;
     acceleration = new PVector(0, 0);
   }
 
@@ -19,23 +23,23 @@ class Mover {
 
     velocity.add(acceleration);
     location.add(velocity);
-    velocity.limit(3);
+    //velocity.limit(3);
   }
 
   void edges() {
-    if (location.x > width-3) {
-      velocity.x *= -1; 
-      location.x = width-1;
+    if (location.x > width) {
+      velocity.x *= -0.96; 
+      //location.x = width;
     } else if (location.x < 3) {
-      velocity.x *= -1; 
-      location.x = 1;
+      velocity.x *= -0.96; 
+      //location.x = 1;
     }
-    if (location.y >= height-3) {
-      velocity.y *= -1;
-      location.y = height-3;
+    if (location.y >= height) {
+      velocity.y *= -0.96;
+      //location.y = height;
     } else if (location.y < 3) {
-      velocity.y *= -1; 
-      location.y = 1;
+      velocity.y *= -0.96; 
+      //location.y = 1;
     }
   }
 
@@ -48,17 +52,21 @@ class Mover {
     if (keyPressed) {
       if (key == CODED) {
         if (keyCode == UP) {
-          acceleration.add(wind);
-        } else if (keyCode == DOWN) {
-          acceleration.sub(wind);
-        } else {
-          //wind = new PVector(0, 0);
+          tmp_vel = velocity;
+          acceleration.add(wind_up);
+        } else if (keyCode == LEFT) {
+          tmp_vel = velocity;
+          acceleration.add(wind_left);
+        } else if (keyCode == RIGHT) {
+          tmp_vel = velocity;
+          acceleration.add(wind_right);
         }
       }
     }
+    else velocity = tmp_vel;
   }
 
-  void gravity() {
-    acceleration.add(gravity);
+  void applyForce(PVector force) {
+    acceleration = force;
   }
 }
