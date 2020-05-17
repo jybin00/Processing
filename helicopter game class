@@ -1,4 +1,5 @@
 class Mover {
+  PImage helicopter;
   PVector location;
   PVector velocity;
   PVector acceleration;
@@ -13,6 +14,7 @@ class Mover {
     velocity = new PVector(1, -1);
     tmp_vel = velocity;
     acceleration = new PVector(0, 0);
+    helicopter = loadImage("helicopter.png");
   }
 
   void update() {
@@ -28,24 +30,29 @@ class Mover {
 
   void edges() {
     if (location.x > width) {
+      //rotateY(360);
       velocity.x *= -0.96; 
       //location.x = width;
     } else if (location.x < 3) {
+      //rotateY(360);
       velocity.x *= -0.96; 
       //location.x = 1;
     }
-    if (location.y >= height) {
+    if (location.y >= height-1) {
       velocity.y *= -0.96;
       //location.y = height;
     } else if (location.y < 3) {
       velocity.y *= -0.96; 
       //location.y = 1;
     }
+    if (location.y >height) {
+      location.y = height-5;
+    }
   }
 
   void display() {
-    ellipse(location.x, location.y, 20, 20);
-    fill(140, 140);
+    imageMode(CENTER);
+    image(helicopter, m.location.x, m.location.y, 50, 50);
   }
 
   void wind() {
@@ -54,16 +61,17 @@ class Mover {
         if (keyCode == UP) {
           tmp_vel = velocity;
           acceleration.add(wind_up);
-        } if (keyCode == LEFT) {
+        } 
+        if (keyCode == LEFT) {
           tmp_vel = velocity;
           acceleration.add(wind_left);
-        } if (keyCode == RIGHT) {
+        } 
+        if (keyCode == RIGHT) {
           tmp_vel = velocity;
           acceleration.add(wind_right);
         }
       }
-    }
-    else velocity = tmp_vel;
+    } else velocity = tmp_vel;
   }
 
   void applyForce(PVector force) {
