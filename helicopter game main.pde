@@ -8,6 +8,10 @@ void setup() {
 
 void draw() {
   
+  noStroke();
+  fill(0,7);
+  rect(0,0,width,height);
+  
   counter++;
 
 
@@ -26,10 +30,11 @@ void draw() {
   fill(0, 0, 0);
   popMatrix();
 
-  fill(0, 102, 153);
+  fill(255);
+  ellipse(random(width), random(height), 5, 5);
 
   if (counter == 30) {
-    background(25, 100, 10);
+    //background(50, 100, 100);
     pushMatrix();
     text("acceleration: " + m.acceleration.x +" " + m.acceleration.y, 10, 15);
     text("velocity: " + String.format("%.2f", m.velocity.x) +" " +
@@ -37,8 +42,6 @@ void draw() {
     text("location " + String.format("%.2f", m.location.x) + " " + String.format("%.2f", m.location.y), 10, 45);
     popMatrix();
 
-    fill(255);
-    ellipse(random(width), random(height), 5, 5);
     counter = 0;
   }
 }
